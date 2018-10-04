@@ -1,0 +1,25 @@
+<div class="card m-5 w-25 shadow" style="left: 33%">
+  <div class="card-body">
+    <form>
+      <div class="text-secondary" style="text-align: center"><strong>LOGIN</strong></div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <div class="input-group mb-3">
+          <input (click)="loginError=false" (input)="loginError=false" name="username" type="text" class="form-control"
+            placeholder="username" aria-label="Recipient's username" aria-describedby="basic-addon2" [(ngModel)]="user.username">
+          <div class="input-group-append">
+            <span class="input-group-text" id="basic-addon2">@yourorg.com</span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input (click)="loginError=false" (input)="loginError=false" name="password" type="password" class="form-control"
+          id="password" placeholder="Password" [(ngModel)]="user.password">
+      </div>
+      <button type="submit" class="btn btn-primary" (click)="login()">Submit <i *ngIf="loginProgress" class="fas fa-spinner fa-spin"></i></button>
+
+      <div *ngIf='loginError'><small class="text-danger"><strong>{{loginErrorText}}</strong></small></div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<div class="card-deck m-5" style="justify-content: center">
+  <div *ngFor="let app of apps" class="card mb-3 shadow" style="max-width: 18rem;">
+    <div class="card-header">{{app.header}}</div>
+    <div class="card-body">
+      <!-- <h5 class="card-title">{{app.title}}</h5> -->
+      <p class="card-text">{{app.description}}</p>
+    </div>
+    <div class="card-footer border-top-0 bg-transparent">
+      <a routerLink="{{app.href}}" [class.disabled]="app.disabled" class="btn btn-primary btn-sm">Click Here <i class="fas fa-arrow-circle-right"></i></a>
+    </div>
+  </div>

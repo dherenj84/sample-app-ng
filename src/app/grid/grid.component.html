@@ -1,0 +1,42 @@
+<p-progressSpinner [strokeWidth]="1" *ngIf="config.loading"></p-progressSpinner>
+<table *ngIf="!config.loading" class="table table-sm table-hover table-bordered h-75">
+  <thead class="bg-light">
+    <tr>
+      <td [attr.colspan]="config.cols.length">
+        Showing <strong>{{config.first + 1}}</strong> to <strong>{{config.first + config.data.length}}</strong>
+        of
+        <strong>{{config.total}}</strong> Total Records
+        <!-- <strong>{{config.total}}</strong> Total Matching Records Found -->
+        <span *ngIf="config.paginate" class="float-right">
+          Page <strong>{{config.page+1}}</strong> of <strong>{{config.pageCount}}</strong>
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <th *ngFor="let col of config.cols; let i=index" scope="col" class="align-text-top">
+        {{col.header}}
+        <a *ngIf="col.sort" href="#" (click)="applySort(i)"><i class="fas fa-sort" [class.fa-sort-alpha-down]="i==sortColumnIndex && currentSortOrder=='asc'"
+            [class.fa-sort-alpha-up]="i==sortColumnIndex && currentSortOrder=='desc'"></i></a>
+      </th>
+    </tr>
+    <tr *ngIf="columnSearch">
+      <td *ngFor="let col of config.cols">
+        <div class="mt-1"><input *ngIf="col.search" type="text" placeholder="Search {{col.header}}"></div>
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of config.data">
+      <td *ngFor="let col of config.cols"><span *ngIf="col.idColumn"><strong><a routerLink="{{config.idColumnHref + '/' + item[col.field]}}">{{item[col.field]}}</a></strong></span><span
+          *ngIf="!col.idColumn">{{item[col.field]}}</span></td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr *ngIf="config.paginate">
+      <td [attr.colspan]="config.cols.length">
+        <p-paginator [rows]="config.pageSize" [totalRecords]="config.total" [rowsPerPageOptions]="[10,25,50,100]"
+          (onPageChange)="paginate($event)" [first]="config.first?config.first:0"></p-paginator>
+      </td>
+    </tr>
+  </tfoot>
+</table>

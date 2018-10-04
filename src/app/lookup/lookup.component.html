@@ -1,0 +1,25 @@
+<div class="dropdown" [attr.name]="name" [id]="name">
+  <button [disabled]="disabled" class="btn btn-secondary btn-sm dropdown-toggle w-100" type="button" id="dropdownMenuButton"
+    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" (click)="clicked()">
+    {{placeholder}}
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <div *ngIf="optionsCopy.length>1" class="text-center m-2">
+      <div class="input-group border rounded">
+        <input [attr.maxlength]="maxLengthFilter" [(ngModel)]="filter" [attr.name]="filterName" [id]="filterName" class="form-control form-control-sm border-0 w-75"
+          placeholder="filter" (input)="filterOptions()" autofocus>
+        <div *ngIf="false" class="input-group-append">
+          <button class="btn btn-sm" (click)="clearFilter()"><i class="fas fa-times"></i></button>
+        </div>
+      </div>
+      <small *ngIf="filter.length>0" class="m-1 text-info">{{options.length}} matching entries</small>
+    </div>
+    <div *ngIf="optionsCopy.length>1" class="dropdown-divider"></div>
+    <div *ngIf="options.length==0" class="text-center">
+      No Matching Results!
+    </div>
+    <div *ngIf="options.length!=0" style="max-height: 400px; max-width: 400px;overflow-y: scroll">
+      <a *ngFor="let option of options;let i=index;" class="dropdown-item" href="#" (click)="selectOption(i)">{{option.label}}</a>
+    </div>
+  </div>
+</div>
